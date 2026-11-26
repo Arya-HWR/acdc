@@ -1,0 +1,23 @@
+
+clc;
+clear all;
+close all;
+
+n = floor(rand(1,10)*2);
+n(n==0) = -1;
+
+h = 1;
+
+for i = 1:10
+    if n(i)==-1
+        a = [ones(1,5)*(-1) zeros(1,5)];
+    else
+        a = [ones(1,5) zeros(1,5)];
+    end
+    h = [h a];
+end
+
+plot(h);
+title('BP-RZ');
+ylim([-1.2 1.2]);
+grid on;
