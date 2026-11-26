@@ -1,0 +1,83 @@
+
+clc;
+clear all;
+close all;
+
+% Generate random binary data
+n = floor(rand(1,10)*2);
+
+% Display input data
+disp('Input Binary Data:');
+disp(n);
+
+% Select Line Coding Technique
+disp('1. BP-RZ');
+disp('2. BP-RZ-AMI');
+disp('3. NRZ-M');
+disp('4. NRZ-S');
+
+ch = input('Enter your choice: ');
+
+h = 1;
+b = 1;
+
+for i = 1:10
+
+    switch ch
+
+        case 1
+            % BP-RZ
+            if n(i)==0
+                a = [-ones(1,5) zeros(1,5)];
+            else
+                a = [ones(1,5) zeros(1,5)];
+            end
+
+        case 2
+            % BP-RZ-AMI
+            if n(i)==0
+                a = zeros(1,10);
+            else
+                b = -b;
+                a = [b*ones(1,5) zeros(1,5)];
+            end
+
+        case 3
+            % NRZ-M
+            if n(i)==1
+                h = -h;
+            end
+            a = h*ones(1,10);
+
+        case 4
+            % NRZ-S
+            if n(i)==0
+                h = -h;
+            end
+            a = h*ones(1,10);
+
+        otherwise
+            disp('Invalid Choice');
+            return;
+
+    end
+
+    if ch==1 || ch==2
+        h = [h a];
+    else
+        h = [h a];
+    end
+
+end
+
+% Plot waveform
+figure;
+plot(h,'LineWidth',1.5);
+title('Line Coding Output');
+xlabel('Time');
+ylabel('Amplitude');
+ylim([-1.5 1.5]);
+grid on;
+
+% Display binary input
+disp('Selected Line Coding Completed!');
