@@ -1,0 +1,22 @@
+
+clc;
+clear all;
+close all;
+
+n = floor(rand(1,10)*2);
+n(n==0) = -1;
+
+h = 1;
+
+for i = 1:10
+    if n(i)==-1
+        h = [h (-1)*ones(1,10)];
+    else
+        h = [h ones(1,10)];
+    end
+end
+
+plot(h);
+title('NRZ-M');
+ylim([-1.2 1.2]);
+grid on;
